@@ -4,6 +4,8 @@ internal class Program
 {
     private static void Main(string[] args)
     {
+        ChoreManager cm = new("chores.json");
+        return;
         string option = args[0].ToLower();
         switch (option)
         {
