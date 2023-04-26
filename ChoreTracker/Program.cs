@@ -6,12 +6,19 @@ internal class Program
     private static void Main(string[] args)
     {
 
+        string[]? arguments = ValidateArguments(args);
+        if (arguments is null)
+        {
+            return;
+        }
+
         ChoreManager cm = new("chores.json");
-        string option = args[0].ToLower();
+
+        string option = arguments[0].ToLower();
         switch (option)
         {
             case "add":
-                cm.Add(args[1]);
+                cm.Add(arguments[1]);
                 break;
             case "remove": break;
             case "do": break;
@@ -27,8 +34,27 @@ internal class Program
                 // help section appears
                 break;
         }
+
         Console.WriteLine(cm.Read());
 
+    }
+
+    private static string[]? ValidateArguments(string[] arguments)
+    {
+
+        if (arguments.Length != 0)
+        {
+            return arguments;
+        }
+
+        Console.Write("Waiting for input: ");
+        string? input = Console.ReadLine();
+        if (input is null)
+        {
+            return null;
+        }
+
+        return input.Split(' ');
     }
 
 }
