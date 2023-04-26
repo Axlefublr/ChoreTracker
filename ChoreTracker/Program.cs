@@ -42,13 +42,17 @@ internal class Program
     {
 
         string option = arguments[0].ToLower();
+        string[] subOptions = arguments[1..];
+
         switch (option)
         {
 
             case "add":
-                cm.AddRange(arguments[1..]);
+                cm.AddRange(subOptions);
                 break;
-            case "remove": break;
+            case "remove":
+                cm.RemoveRange(subOptions);
+                break;
             case "do": break;
             case "list": break;
             case "last": break;

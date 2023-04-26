@@ -19,15 +19,23 @@ public class ChoreManager
 
     public void AddRange(string[] chores)
     {
-
         foreach (string chore in chores)
         {
             Add(chore);
         }
-
     }
 
     public void Add(string chore) => jsonObj.Add(chore, new JsonArray());
+
+    public void RemoveRange(string[] chores)
+    {
+        foreach (string chore in chores)
+        {
+            Remove(chore);
+        }
+    }
+
+    public void Remove(string chore) => jsonObj.Remove(chore);
 
     public string Read()
     {
