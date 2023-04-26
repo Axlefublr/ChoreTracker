@@ -30,7 +30,7 @@ internal class Program
 
         Console.Write("Waiting for input: ");
         string? input = Console.ReadLine();
-        if (input is null)
+        if (string.IsNullOrEmpty(input))
         {
             return null;
         }
@@ -46,7 +46,7 @@ internal class Program
         {
 
             case "add":
-                cm.Add(arguments[1]);
+                cm.AddRange(arguments[1..]);
                 break;
             case "remove": break;
             case "do": break;

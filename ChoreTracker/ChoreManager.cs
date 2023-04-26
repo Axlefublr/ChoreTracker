@@ -17,6 +17,16 @@ public class ChoreManager
         jsonObj = Parse();
     }
 
+    public void AddRange(string[] chores)
+    {
+
+        foreach (string chore in chores)
+        {
+            Add(chore);
+        }
+
+    }
+
     public void Add(string chore) => jsonObj.Add(chore, new JsonArray());
 
     public string Read()
