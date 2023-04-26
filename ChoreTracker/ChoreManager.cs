@@ -44,9 +44,9 @@ public class ChoreManager
 
     public void List()
     {
-        foreach (KeyValuePair<string, JsonNode?> subObj in jsonObj)
+        foreach (string chore in ListChores())
         {
-            Console.WriteLine(subObj.Key);
+            Console.WriteLine(chore);
         }
     }
 
@@ -61,6 +61,19 @@ public class ChoreManager
         File.WriteAllText(jsonPath, Read());
     }
 
+
+    private List<string> ListChores()
+    {
+        uint i = 0;
+        List<string> chores = new();
+        foreach (KeyValuePair<string, JsonNode?> subObj in jsonObj)
+        {
+            i++;
+            var lastDate = subObj.Value ?? "None";
+            chores.Add(i + ") " + subObj.Key + " " + lastDate);
+        }
+        return chores;
+    }
 
     private JsonObject Parse() => (JsonObject)JsonNode.Parse(File.ReadAllText(jsonPath))!;
 
