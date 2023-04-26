@@ -3,12 +3,12 @@
 internal class Program
 {
 
-    private static ChoreManager? cm;
+    private static ChoreManager cm;
 
     private static void Main(string[] args)
     {
 
-        string[]? arguments = ValidateArguments(args);
+        string[] arguments = ValidateArguments(args);
         if (arguments is null)
         {
             return;
@@ -22,7 +22,7 @@ internal class Program
 
     }
 
-    private static string[]? ValidateArguments(string[] arguments)
+    private static string[] ValidateArguments(string[] arguments)
     {
 
         if (arguments.Length != 0)
@@ -31,7 +31,7 @@ internal class Program
         }
 
         Console.Write("Waiting for input: ");
-        string? input = Console.ReadLine();
+        string input = Console.ReadLine();
         if (input is null)
         {
             return null;
@@ -42,9 +42,11 @@ internal class Program
 
     private static void DoAction(string[] arguments)
     {
+
         string option = arguments[0].ToLower();
         switch (option)
         {
+
             case "add":
                 cm.Add(arguments[1]);
                 break;
@@ -61,6 +63,7 @@ internal class Program
                 Console.WriteLine("No such option!");
                 // help section appears
                 break;
+
         }
     }
 }
