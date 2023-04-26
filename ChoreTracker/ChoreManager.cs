@@ -37,10 +37,28 @@ public class ChoreManager
 
     public void Remove(string chore) => jsonObj.Remove(chore);
 
+    public void Do(string chore)
+    {
+
+    }
+
+    public void List()
+    {
+        foreach (KeyValuePair<string, JsonNode?> subObj in jsonObj)
+        {
+            Console.WriteLine(subObj.Key);
+        }
+    }
+
     public string Read()
     {
         JsonSerializerOptions jsonSerializerOptions = new() { WriteIndented = true };
         return jsonObj.ToJsonString(jsonSerializerOptions);
+    }
+
+    public void SaveChanges()
+    {
+        File.WriteAllText(jsonPath, Read());
     }
 
 
@@ -48,9 +66,10 @@ public class ChoreManager
 
     private void MakeSureExists()
     {
-        // if (!File.Exists(jsonPath))
-        // {
-        File.WriteAllText(jsonPath, "{}");
-        // }
+        if (!File.Exists(jsonPath))
+        {
+            File.WriteAllText(jsonPath, "{}");
+        }
     }
+
 }

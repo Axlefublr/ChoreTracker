@@ -17,7 +17,7 @@ internal class Program
         DoAction(arguments);
 
         Console.WriteLine(cm.Read());
-
+        cm.SaveChanges();
     }
 
     private static string[]? ValidateArguments(string[] arguments)
@@ -41,22 +41,24 @@ internal class Program
     private static void DoAction(string[] arguments)
     {
 
-        string option = arguments[0].ToLower();
-        string[] subOptions = arguments[1..];
+        string command = arguments[0].ToLower();
+        string[] options = arguments[1..];
 
-        switch (option)
+        switch (command)
         {
 
             case "add":
-                cm.AddRange(subOptions);
+                cm.AddRange(options);
                 break;
             case "remove":
-                cm.RemoveRange(subOptions);
+                cm.RemoveRange(options);
                 break;
             case "do": break;
-            case "list": break;
-            case "last": break;
+            case "list":
+                cm.List();
+                break;
             case "--help":
+            case "-help":
             case "-h":
             case "help":
                 // help section appears
