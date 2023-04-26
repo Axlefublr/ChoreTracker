@@ -2,8 +2,10 @@
 
 internal class Program
 {
+
     private static void Main(string[] args)
     {
+
         ChoreManager cm = new("chores.json");
         string option = args[0].ToLower();
         switch (option)
@@ -26,5 +28,7 @@ internal class Program
                 break;
         }
         Console.WriteLine(cm.Read());
+
     }
+
 }
