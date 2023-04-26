@@ -3,6 +3,8 @@
 internal class Program
 {
 
+    private static ChoreManager? cm;
+
     private static void Main(string[] args)
     {
 
@@ -12,28 +14,9 @@ internal class Program
             return;
         }
 
-        ChoreManager cm = new("chores.json");
+        cm = new("chores.json");
 
-        string option = arguments[0].ToLower();
-        switch (option)
-        {
-            case "add":
-                cm.Add(arguments[1]);
-                break;
-            case "remove": break;
-            case "do": break;
-            case "list": break;
-            case "last": break;
-            case "--help":
-            case "-h":
-            case "help":
-                // help section appears
-                break;
-            default:
-                Console.WriteLine("No such option!");
-                // help section appears
-                break;
-        }
+        DoAction(arguments);
 
         Console.WriteLine(cm.Read());
 
@@ -57,4 +40,27 @@ internal class Program
         return input.Split(' ');
     }
 
+    private static void DoAction(string[] arguments)
+    {
+        string option = arguments[0].ToLower();
+        switch (option)
+        {
+            case "add":
+                cm.Add(arguments[1]);
+                break;
+            case "remove": break;
+            case "do": break;
+            case "list": break;
+            case "last": break;
+            case "--help":
+            case "-h":
+            case "help":
+                // help section appears
+                break;
+            default:
+                Console.WriteLine("No such option!");
+                // help section appears
+                break;
+        }
+    }
 }
