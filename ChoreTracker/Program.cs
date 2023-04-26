@@ -5,11 +5,12 @@ internal class Program
     private static void Main(string[] args)
     {
         ChoreManager cm = new("chores.json");
-        return;
         string option = args[0].ToLower();
         switch (option)
         {
-            case "add": break;
+            case "add":
+                cm.Add(args[1]);
+                break;
             case "remove": break;
             case "do": break;
             case "list": break;
@@ -24,5 +25,6 @@ internal class Program
                 // help section appears
                 break;
         }
+        Console.WriteLine(cm.Read());
     }
 }

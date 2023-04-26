@@ -1,4 +1,5 @@
 using System.Text.Json;
+using System.Text.Json.Nodes;
 
 namespace ChoreTracker;
 
@@ -7,8 +8,7 @@ public class ChoreManager
 
     private readonly string jsonPath;
 
-    private readonly JsonDocument jsonObj;
-
+    private readonly JsonObject jsonObj;
 
     public ChoreManager(string jsonPath)
     {
@@ -17,14 +17,22 @@ public class ChoreManager
         jsonObj = Parse();
     }
 
+    public void Add(string chore) => jsonObj.Add(chore, new JsonArray());
 
-    private JsonDocument Parse() => JsonDocument.Parse(File.ReadAllText(jsonPath));
+    public string Read()
+    {
+        JsonSerializerOptions jsonSerializerOptions = new() { WriteIndented = true };
+        return jsonObj.ToJsonString(jsonSerializerOptions);
+    }
+
+
+    private JsonObject Parse() => (JsonObject)JsonNode.Parse(File.ReadAllText(jsonPath))!;
 
     private void MakeSureExists()
     {
-        if (!File.Exists(jsonPath))
-        {
-            File.WriteAllText(jsonPath, "{}");
-        }
+        // if (!File.Exists(jsonPath))
+        // {
+        File.WriteAllText(jsonPath, "{}");
+        // }
     }
 }
