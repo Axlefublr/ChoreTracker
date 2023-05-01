@@ -96,7 +96,7 @@ public class ChoreManager
         }
     }
 
-    private static JsonNode? DateTimeString => DateTime.Now.ToString("yyyy.MM.dd HH:mm");
+    private static JsonNode? DateTimeString => DateTime.Now.ToString("yyyy.MM.dd");
 
     private JsonObject Parse() => (JsonObject)JsonNode.Parse(File.ReadAllText(jsonPath))!;
 
