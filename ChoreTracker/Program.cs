@@ -5,7 +5,7 @@ namespace ChoreTracker;
 internal class Program
 {
 
-    private static readonly ChoreManager cm = new("chores.json");
+    private static readonly ChoreManager cm = new();
 
     private static void Main(string[] args)
     {

@@ -6,13 +6,12 @@ namespace ChoreTracker;
 public class ChoreManager
 {
 
-    private readonly string jsonPath;
+    private readonly string jsonPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "chores.json");
 
     private readonly JsonObject jsonObj;
 
-    public ChoreManager(string jsonPath)
+    public ChoreManager()
     {
-        this.jsonPath = jsonPath;
         MakeSureExists();
         jsonObj = Parse();
     }
