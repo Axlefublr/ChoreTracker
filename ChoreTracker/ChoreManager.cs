@@ -35,7 +35,15 @@ public class ChoreManager
         }
     }
 
-    public void Remove(string chore) => jsonObj.Remove(chore);
+    public void Remove(string chore)
+    {
+        if (jsonObj.ContainsKey(chore))
+        {
+            jsonObj.Remove(chore);
+            return;
+        }
+        Console.WriteLine("chore \"" + chore + "\" doesn't exist!");
+    }
 
     public void DoRange(string[] chores)
     {
