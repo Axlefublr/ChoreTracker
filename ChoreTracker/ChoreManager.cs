@@ -92,7 +92,7 @@ public class ChoreManager
     {
         foreach (KeyValuePair<string, JsonNode?> subObj in jsonObj)
         {
-            Console.WriteLine(subObj.Key + "\t" + subObj.Value);
+            Console.WriteLine(subObj.Key + " - " + subObj.Value);
         }
     }
 
