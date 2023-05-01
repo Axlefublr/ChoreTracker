@@ -56,7 +56,9 @@ internal class Program
             case "remove":
                 cm.RemoveRange(options);
                 break;
-            case "do": break;
+            case "do":
+                cm.DoRange(options);
+                break;
             case "list":
                 cm.List();
                 break;

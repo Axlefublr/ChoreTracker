@@ -37,9 +37,22 @@ public class ChoreManager
 
     public void Remove(string chore) => jsonObj.Remove(chore);
 
+    public void DoRange(string[] chores)
+    {
+        foreach (string chore in chores)
+        {
+            Do(chore);
+        }
+    }
+
     public void Do(string chore)
     {
-
+        if (jsonObj.ContainsKey(chore))
+        {
+            jsonObj[chore] = DateTimeString;
+            return;
+        }
+        Console.WriteLine("chore \"" + chore + "\" doesn't exist!");
     }
 
     public string Read()
