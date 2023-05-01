@@ -1,4 +1,6 @@
-﻿namespace ChoreTracker;
+﻿using System.Text;
+
+namespace ChoreTracker;
 
 internal class Program
 {
@@ -7,6 +9,8 @@ internal class Program
 
     private static void Main(string[] args)
     {
+        Console.OutputEncoding = Encoding.Unicode;
+        Console.InputEncoding = Encoding.Unicode;
 
         string[]? arguments = ValidateArguments(args);
         if (arguments is null)
@@ -16,7 +20,6 @@ internal class Program
 
         DoAction(arguments);
 
-        Console.WriteLine(cm.Read());
         cm.SaveChanges();
     }
 

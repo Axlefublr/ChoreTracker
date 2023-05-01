@@ -14,7 +14,7 @@ public class ChoreManager
     {
         this.jsonPath = jsonPath;
         MakeSureExists();
-        jsonObj = Pull();
+        jsonObj = Parse();
     }
 
     public void AddRange(string[] chores)
@@ -25,7 +25,7 @@ public class ChoreManager
         }
     }
 
-    public void Add(string chore) => jsonObj.Add(chore, GetDateTimeString());
+    public void Add(string chore) => jsonObj.Add(chore, DateTimeString);
 
     public void RemoveRange(string[] chores)
     {
@@ -56,20 +56,15 @@ public class ChoreManager
 
     public void List()
     {
-        uint i = 0;
         foreach (KeyValuePair<string, JsonNode?> subObj in jsonObj)
         {
-            i++;
-            Console.WriteLine(i + ") " + subObj.Key + " " + subObj.Value);
+            Console.WriteLine(subObj.Key + "\t" + subObj.Value);
         }
     }
 
-    private JsonNode? GetDateTimeString()
-    {
-        return DateTime.Now.ToString("yyyy.MM.dd HH:mm");
-    }
+    private static JsonNode? DateTimeString => DateTime.Now.ToString("yyyy.MM.dd HH:mm");
 
-    private JsonObject Pull() => (JsonObject)JsonNode.Parse(File.ReadAllText(jsonPath))!;
+    private JsonObject Parse() => (JsonObject)JsonNode.Parse(File.ReadAllText(jsonPath))!;
 
     private void MakeSureExists()
     {
