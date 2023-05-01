@@ -25,7 +25,7 @@ public class ChoreManager
         }
     }
 
-    public void Add(string chore) => jsonObj.Add(chore, DateTimeString);
+    public void Add(string chore) => jsonObj.Add(chore, "Never");
 
     public void RemoveRange(string[] chores)
     {
