@@ -62,6 +62,20 @@ public class ChoreManager
         Console.WriteLine("chore \"" + chore + "\" doesn't exist!");
     }
 
+    public static void Help()
+    {
+        Console.WriteLine(
+            """
+            list - list all your added chores with the last time you did them
+            chores that you haven't done yet will display "Never" in them
+            add choreName1 choreName2 - add new chores to your list
+            remove choreName1 choreName2 - remove chores from your list
+            do choreName1 choreName2 - do chores, setting the current time as their value
+            literally anything else - display this help message
+            """
+        );
+    }
+
     public string Read()
     {
         JsonSerializerOptions jsonSerializerOptions = new() { WriteIndented = true };

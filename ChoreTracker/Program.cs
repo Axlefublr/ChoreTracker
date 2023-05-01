@@ -62,15 +62,8 @@ internal class Program
             case "list":
                 cm.List();
                 break;
-            case "--help":
-            case "-help":
-            case "-h":
-            case "help":
-                // help section appears
-                break;
             default:
-                Console.WriteLine("No such option!");
-                // help section appears
+                ChoreManager.Help();
                 break;
 
         }
