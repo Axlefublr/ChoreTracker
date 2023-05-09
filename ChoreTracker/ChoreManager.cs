@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
@@ -93,11 +94,32 @@ public class ChoreManager
     public string GetListString()
     {
         StringBuilder sb = new();
+        string dateString;
         foreach (KeyValuePair<string, JsonNode?> subObj in jsonObj)
         {
-            sb.AppendLine(subObj.Key + " - " + subObj.Value);
+            if ((string)subObj.Value! == "Never")
+            {
+                dateString = "Never";
+            }
+            else
+            {
+                dateString = GetDaysDifference(subObj.Value!) + " days ago";
+            }
+            sb.AppendLine(subObj.Key + " - " + dateString);
         }
         return sb.ToString();
+    }
+
+    private static string GetDaysDifference(JsonNode date)
+    {
+        bool success = DateTime.TryParseExact((string)date!, "yyyy.MM.dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedDate);
+        if (!success)
+        {
+            throw new ArgumentException("Invalid date format. Use 'yyyy.MM.dd' or 'Never'");
+        }
+        TimeSpan difference = parsedDate - DateTime.Now;
+        int daysDifference = Math.Abs((int)difference.TotalDays);
+        return daysDifference.ToString();
     }
 
     public void List()
