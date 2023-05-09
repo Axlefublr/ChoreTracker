@@ -1,3 +1,4 @@
+using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 
@@ -89,12 +90,19 @@ public class ChoreManager
     }
 
 
-    public void List()
+    public string GetListString()
     {
+        StringBuilder sb = new();
         foreach (KeyValuePair<string, JsonNode?> subObj in jsonObj)
         {
-            Console.WriteLine(subObj.Key + " - " + subObj.Value);
+            sb.AppendLine(subObj.Key + " - " + subObj.Value);
         }
+        return sb.ToString();
+    }
+
+    public void List()
+    {
+        Console.WriteLine(GetListString());
     }
 
     private static JsonNode? DateTimeString => DateTime.Now.ToString("yyyy.MM.dd");
