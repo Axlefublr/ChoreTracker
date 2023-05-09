@@ -66,17 +66,17 @@ public class ChoreManager
 
     public const string HelpMessage =
     """
-    list - list all your added chores with the last time you did them
-    chores that you haven't done yet will display "Never" in them
-    add choreName1 choreName2 - add new chores to your list
-    remove choreName1 choreName2 - remove chores from your list
-    do choreName1 choreName2 - do chores, setting the current time as their value
-    literally anything else - display this help message
+    list - List all your added chores with the last time you did them.
+    - Chores that you haven't done yet will display "Never" in them
+    add choreName1 choreName2 - Add new chores to your list
+    remove choreName1 choreName2 - Remove chores from your list
+    do choreName1 choreName2 - Do chores, setting the current time as their value
+    literally anything else - Display this help message
     """;
 
     public static void Help()
     {
-        Console.WriteLine(HelpMessage);
+        Console.WriteLine(StringExtensions.AlignByFirstChar(HelpMessage, '-'));
     }
 
     public string Read()
@@ -106,7 +106,7 @@ public class ChoreManager
             }
             sb.AppendLine(subObj.Key + " - " + dateString);
         }
-        return StringExtensions.AlignByFirstSpace(sb.ToString());
+        return StringExtensions.AlignByFirstChar(sb.ToString(), ' ');
     }
 
     public void List()

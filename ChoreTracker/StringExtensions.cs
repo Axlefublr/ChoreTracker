@@ -4,33 +4,32 @@ namespace ChoreTracker;
 
 public static class StringExtensions
 {
-    public static string AlignByFirstSpace(string text)
+    public static string AlignByFirstChar(string text, char alignChr)
     {
-        string[] lines = text.Split(Environment.NewLine);
-        int maxSpaceIndex = 0;
+        string[] lines = text.Split('\n');
+        int maxIndex = 0;
 
-        // Find max space index
         foreach (string line in lines)
         {
-            int spaceIndex = line.IndexOf(' ');
-            if (spaceIndex >= 0 && spaceIndex > maxSpaceIndex)
+            int charIndex = line.IndexOf(alignChr);
+            if (charIndex >= 0 && charIndex > maxIndex)
             {
-                maxSpaceIndex = spaceIndex;
+                maxIndex = charIndex;
             }
         }
 
         // Align lines by padding spaces before the first space
         for (int i = 0; i < lines.Length; i++)
         {
-            int spaceIndex = lines[i].IndexOf(' ');
-            if (spaceIndex >= 0 && spaceIndex < maxSpaceIndex)
+            int charIndex = lines[i].IndexOf(alignChr);
+            if (charIndex >= 0 && charIndex < maxIndex)
             {
-                int padding = maxSpaceIndex - spaceIndex;
-                lines[i] = lines[i].Insert(spaceIndex, new string(' ', padding));
+                int padding = maxIndex - charIndex;
+                lines[i] = lines[i].Insert(charIndex, new string(' ', padding));
             }
         }
 
-        return string.Join(Environment.NewLine, lines);
+        return string.Join('\n', lines);
     }
 
     public static string GetDaysDifference(string date)
