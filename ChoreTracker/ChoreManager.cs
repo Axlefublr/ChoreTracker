@@ -131,4 +131,21 @@ public class ChoreManager
 		}
 	}
 
+	public void ViewRange(string[] chores)
+	{
+		StringBuilder sb = new();
+		foreach (string chore in chores)
+		{
+			AppendChoreString(sb, chore, (string)jsonObj[chore]!);
+		}
+		Console.Write(StringExtensions.AlignByFirstChar(sb.ToString(), ' '));
+	}
+
+	public void View(string chore)
+	{
+		StringBuilder sb = new();
+		AppendChoreString(sb, chore, (string)jsonObj[chore]!);
+		Console.WriteLine(sb.ToString());
+	}
+
 }
