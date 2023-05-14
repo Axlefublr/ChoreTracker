@@ -93,20 +93,25 @@ public class ChoreManager
 	public string GetListString()
 	{
 		StringBuilder sb = new();
-		string dateString;
 		foreach (KeyValuePair<string, JsonNode?> subObj in jsonObj)
 		{
-			if ((string)subObj.Value! == "Never")
-			{
-				dateString = "Never";
-			}
-			else
-			{
-				dateString = StringExtensions.GetDaysDifference((string)subObj.Value!) + " days ago";
-			}
-			sb.AppendLine(subObj.Key + " - " + dateString);
+			AppendChoreString(sb, subObj.Key, (string)subObj.Value!);
 		}
 		return StringExtensions.AlignByFirstChar(sb.ToString(), ' ');
+	}
+
+	private void AppendChoreString(StringBuilder sb, string choreName, string date)
+	{
+		string dateString;
+		if (date == "Never")
+		{
+			dateString = "Never";
+		}
+		else
+		{
+			dateString = StringExtensions.GetDaysDifference(date) + " days ago";
+		}
+		sb.AppendLine(choreName + " - " + dateString);
 	}
 
 	public void List()
