@@ -97,7 +97,7 @@ public class ChoreManager
 		{
 			AppendChoreString(sb, subObj.Key, (string)subObj.Value!);
 		}
-		return StringExtensions.AlignByFirstChar(sb.ToString(), ' ');
+		return StringExtensions.AlignByFirstChar(sb.ToString(), '&').Replace('&', '-');
 	}
 
 	private void AppendChoreString(StringBuilder sb, string choreName, string date)
@@ -111,7 +111,7 @@ public class ChoreManager
 		{
 			dateString = StringExtensions.GetDaysDifference(date) + " days ago";
 		}
-		sb.AppendLine(choreName + " - " + dateString);
+		sb.AppendLine(choreName + " & " + dateString);
 	}
 
 	public void List()
