@@ -1,4 +1,10 @@
+using CommandLine;
+
 namespace ChoreTracker.Verbs;
 
-public class DoVerb {
+[Verb("do", HelpText = "Do specified chores, updating their date to today.")]
+public class DoVerb
+{
+	[Value(0, Required = true)]
+	public required IEnumerable<string> Chores { get; set; }
 }
