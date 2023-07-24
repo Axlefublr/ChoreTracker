@@ -1,6 +1,9 @@
 ﻿using ChoreTracker.Verbs;
 using ChoreTracker.Behavior;
 using CommandLine;
+using ChoreTracker.Repositories;
+
+IRepository repository = new JsonRepository().EnsureExists();
 
 Parser.Default.ParseArguments<
 	DoVerb,
