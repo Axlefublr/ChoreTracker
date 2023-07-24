@@ -10,6 +10,12 @@ public class JsonRepository : IRepository
 	private static readonly string applicationFilename = "ChoreTracker.json";
 	private static readonly string path = Path.Combine(applicationDirectory, applicationFilename);
 
+	private Dictionary<string, DateTime> data;
+
+	public JsonRepository() {
+		data = Parse();
+	}
+
 	public IRepository EnsureExists()
 	{
 		if (!Directory.Exists(applicationDirectory)) {
@@ -26,7 +32,7 @@ public class JsonRepository : IRepository
 		throw new NotImplementedException();
 	}
 
-	public void Save(Dictionary<string, DateTime> data)
+	public void Save()
 	{
 		throw new NotImplementedException();
 	}
