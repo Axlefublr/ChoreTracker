@@ -3,7 +3,7 @@ using ChoreTracker.Behavior;
 using CommandLine;
 using ChoreTracker.Repositories;
 
-IRepository repository = new JsonRepository().EnsureExists();
+IChoresRepository repository = new FileJsonChoresRepository();
 
 Parser.Default.ParseArguments<
 	DoVerb,
@@ -12,9 +12,9 @@ Parser.Default.ParseArguments<
 	RemoveVerb
 >(args)
 .MapResult(
-	(DoVerb options) => options.Run(),
-	(AddVerb options) => options.Run(),
-	(ListVerb options) => options.Run(),
-	(RemoveVerb options) => options.Run(),
+	(DoVerb options) => options.Run(repository),
+	(AddVerb options) => options.Run(repository),
+	(ListVerb options) => options.Run(repository),
+	(RemoveVerb options) => options.Run(repository),
 	errors => 1
 );

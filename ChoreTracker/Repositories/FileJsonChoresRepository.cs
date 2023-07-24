@@ -1,6 +1,8 @@
+using System.Text.Json;
+
 namespace ChoreTracker.Repositories;
 
-public class JsonRepository : IRepository
+public class FileJsonChoresRepository : IChoresRepository
 {
 
 	private const string EMPTY_JSON_OBJECT = "{}";
@@ -10,30 +12,33 @@ public class JsonRepository : IRepository
 	private static readonly string applicationFilename = "ChoreTracker.json";
 	private static readonly string path = Path.Combine(applicationDirectory, applicationFilename);
 
-	private Dictionary<string, DateTime> data;
+	private Dictionary<string, DateTime>? data;
 
-	public JsonRepository() {
+	public FileJsonChoresRepository()
+	{
+		EnsureExists();
 		data = Parse();
 	}
 
-	public IRepository EnsureExists()
+	public void EnsureExists()
 	{
-		if (!Directory.Exists(applicationDirectory)) {
+		if (!Directory.Exists(applicationDirectory))
+		{
 			Directory.CreateDirectory(applicationDirectory);
 		}
-		if (!File.Exists(path)) {
+		if (!File.Exists(path))
+		{
 			File.WriteAllText(path, EMPTY_JSON_OBJECT);
 		}
-		return this;
 	}
 
-	public Dictionary<string, DateTime> Parse()
+	public void Save() => File.WriteAllText(path, JsonSerializer.Serialize(data));
+
+	private static Dictionary<string, DateTime>? Parse()
 	{
-		throw new NotImplementedException();
+		return JsonSerializer.Deserialize<Dictionary<string, DateTime>>(JsonString);
 	}
 
-	public void Save()
-	{
-		throw new NotImplementedException();
-	}
+	private static string JsonString => File.ReadAllText(path);
+
 }
