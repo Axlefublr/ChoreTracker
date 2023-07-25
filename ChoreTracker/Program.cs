@@ -5,7 +5,7 @@ using ChoreTracker.Repositories;
 
 IChoresRepository repository = new FileJsonChoresRepository();
 
-Parser.Default.ParseArguments<
+var result = Parser.Default.ParseArguments<
 	DoVerb,
 	AddVerb,
 	ListVerb,
@@ -18,3 +18,7 @@ Parser.Default.ParseArguments<
 	(RemoveVerb options) => options.Run(repository),
 	errors => 1
 );
+
+repository.Save();
+
+return result;

@@ -12,7 +12,7 @@ public class FileJsonChoresRepository : IChoresRepository
 	private static readonly string applicationFilename = "ChoreTracker.json";
 	private static readonly string path = Path.Combine(applicationDirectory, applicationFilename);
 
-	private Dictionary<string, DateTime>? data;
+	private Dictionary<string, DateTime> data;
 
 	public FileJsonChoresRepository()
 	{
@@ -34,9 +34,58 @@ public class FileJsonChoresRepository : IChoresRepository
 
 	public void Save() => File.WriteAllText(path, JsonSerializer.Serialize(data));
 
-	private static Dictionary<string, DateTime>? Parse()
+	public void Add(IEnumerable<string> chores)
 	{
-		return JsonSerializer.Deserialize<Dictionary<string, DateTime>>(JsonString);
+		foreach (string chore in chores)
+		{
+			data.Add(chore, DateTime.Now);
+		}
+	}
+
+	public void List(IEnumerable<string> chores)
+	{
+		throw new NotImplementedException();
+	}
+
+	public int Remove(IEnumerable<string> chores)
+	{
+		int missings = 0;
+		foreach (string chore in chores)
+		{
+			try
+			{
+				data.Remove(chore);
+			}
+			catch
+			{
+				Console.Error.WriteLine($"Chore '{chore}' doesn't exist");
+				missings++;
+			}
+		}
+		return missings;
+	}
+
+	public int Do(IEnumerable<string> chores)
+	{
+		int missings = 0;
+		foreach (string chore in chores)
+		{
+			try
+			{
+				data[chore] = DateTime.Now;
+			}
+			catch
+			{
+				Console.Error.WriteLine($"Chore '{chore}' doesn't exist");
+				missings++;
+			}
+		}
+		return missings;
+	}
+
+	private static Dictionary<string, DateTime> Parse()
+	{
+		return JsonSerializer.Deserialize<Dictionary<string, DateTime>>(JsonString) ?? new Dictionary<string, DateTime>();
 	}
 
 	private static string JsonString => File.ReadAllText(path);

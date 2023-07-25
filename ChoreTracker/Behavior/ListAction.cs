@@ -5,7 +5,7 @@ namespace ChoreTracker.Behavior;
 
 public static class ListAction {
 	public static int Run(this ListVerb options, IChoresRepository repository) {
-		Console.WriteLine(repository);
+		repository.List(options.Chores);
 		return 0;
 	}
 }
