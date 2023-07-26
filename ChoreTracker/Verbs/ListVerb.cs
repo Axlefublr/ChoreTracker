@@ -1,3 +1,4 @@
+using ChoreTracker.Repositories;
 using CommandLine;
 
 namespace ChoreTracker.Verbs;
@@ -6,4 +7,9 @@ namespace ChoreTracker.Verbs;
 public class ListVerb {
 	[Value(0)]
 	public IEnumerable<string> Chores { get; set; } = Array.Empty<string>();
+
+	public int Run(IChoresRepository repository) {
+		repository.List(Chores);
+		return 0;
+	}
 }

@@ -44,7 +44,14 @@ public class FileJsonChoresRepository : IChoresRepository
 
 	public void List(IEnumerable<string> chores)
 	{
-		throw new NotImplementedException();
+		if (chores.Count == 0)
+		{
+			Lister.ListAll(data);
+		}
+		else
+		{
+			Lister.ListSome(data, chores);
+		}
 	}
 
 	public int Remove(IEnumerable<string> chores)
