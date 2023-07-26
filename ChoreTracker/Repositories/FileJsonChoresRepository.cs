@@ -12,7 +12,7 @@ public class FileJsonChoresRepository : IChoresRepository
 	private static readonly string applicationFilename = "ChoreTracker.json";
 	private static readonly string path = Path.Combine(applicationDirectory, applicationFilename);
 
-	private Dictionary<string, DateTime> data;
+	private readonly Dictionary<string, DateTime> data;
 
 	public FileJsonChoresRepository()
 	{
@@ -44,13 +44,13 @@ public class FileJsonChoresRepository : IChoresRepository
 
 	public void List(IEnumerable<string> chores)
 	{
-		if (chores.Count == 0)
+		if (!chores.Any())
 		{
-			Lister.ListAll(data);
+			new Lister(data).ListAll();
 		}
 		else
 		{
-			Lister.ListSome(data, chores);
+			new Lister(data).ListSome(chores);
 		}
 	}
 

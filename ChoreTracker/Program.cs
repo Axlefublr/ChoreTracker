@@ -1,5 +1,4 @@
 ﻿using ChoreTracker.Verbs;
-using ChoreTracker.Behavior;
 using CommandLine;
 using ChoreTracker.Repositories;
 
