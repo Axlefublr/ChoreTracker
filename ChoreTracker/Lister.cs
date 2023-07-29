@@ -6,20 +6,19 @@ public class Lister
 {
 
 	private readonly Dictionary<string, DateTime> data;
-	private readonly int maxLength;
 
 	public Lister(Dictionary<string, DateTime> data)
 	{
 		this.data = data;
-		maxLength = GetHighestLength();
 	}
 
 	public void ListAll()
 	{
-		if (data.Count < 0)
+		if (data.Count <= 0)
 		{
 			return;
 		}
+		int maxLength = data.Keys.Max(chore => chore.Length);
 		StringBuilder sb = new();
 		foreach (KeyValuePair<string, DateTime> pair in data)
 		{
@@ -32,10 +31,11 @@ public class Lister
 
 	public void ListSome(IEnumerable<string> selected)
 	{
-		if (data.Count < 0)
+		if (data.Count <= 0)
 		{
 			return;
 		}
+		int maxLength = selected.Max(chore => chore.Length);
 		StringBuilder sb = new();
 		foreach (KeyValuePair<string, DateTime> pair in data)
 		{
@@ -54,18 +54,6 @@ public class Lister
 		return data
 			.OrderByDescending(pair => pair.Value)
 			.ToList();
-	}
-
-	private int GetHighestLength()
-	{
-		if (data.Count > 0)
-		{
-			return data.Keys.Max(chore => chore.Length);
-		}
-		else
-		{
-			return 0;
-		}
 	}
 
 	private static string GenerateSpacePadding(int amount) => new(' ', amount);
