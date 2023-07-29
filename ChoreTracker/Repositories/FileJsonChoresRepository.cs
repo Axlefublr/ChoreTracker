@@ -20,7 +20,12 @@ public class FileJsonChoresRepository : IChoresRepository
 		data = Parse();
 	}
 
-	public void EnsureExists()
+	/// <summary>
+	/// Creates the json file needed for storing the data.
+	/// The path will be ~/.local/share/ChoreTracker/ChoreTracker.json on linux.
+	/// Works for windows as well, I just don't know the path.
+	/// </summary>
+	private static void EnsureExists()
 	{
 		if (!Directory.Exists(applicationDirectory))
 		{
